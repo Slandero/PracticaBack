@@ -66,15 +66,7 @@ const defaultConfig = {
 };
 
 async function setupEnvironment() {
-  console.log(`${colors.cyan}${colors.bright}`);
-  console.log('╔══════════════════════════════════════════════════════════════╗');
-  console.log('║                CONFIGURACIÓN TELECOM PLUS S.A.S.            ║');
-  console.log('║                    Variables de Entorno                      ║');
-  console.log('╚══════════════════════════════════════════════════════════════╝');
-  console.log(`${colors.reset}\n`);
-
-  console.log(`${colors.yellow}Este script te ayudará a configurar las variables de entorno.${colors.reset}`);
-  console.log(`${colors.yellow}Presiona Enter para usar los valores por defecto.${colors.reset}\n`);
+  
 
   const config = {};
 
@@ -86,117 +78,59 @@ async function setupEnvironment() {
   config.DB_PORT = await question(`Puerto de MongoDB (${defaultConfig.DB_PORT}): `) || defaultConfig.DB_PORT;
 
   // Configuración del Servidor
-  console.log(`\n${colors.blue}🚀 CONFIGURACIÓN DEL SERVIDOR${colors.reset}`);
+  console.log(`\n${colors.blue} CONFIGURACIÓN DEL SERVIDOR${colors.reset}`);
   config.PORT = await question(`Puerto del servidor (${defaultConfig.PORT}): `) || defaultConfig.PORT;
   config.NODE_ENV = await question(`Entorno (${defaultConfig.NODE_ENV}): `) || defaultConfig.NODE_ENV;
 
   // Configuración de JWT
-  console.log(`\n${colors.blue}🔐 CONFIGURACIÓN DE JWT${colors.reset}`);
+  console.log(`\n${colors.blue} CONFIGURACIÓN DE JWT${colors.reset}`);
   console.log(`${colors.green}JWT Secret generado automáticamente: ${config.JWT_SECRET || defaultConfig.JWT_SECRET}${colors.reset}`);
   config.JWT_SECRET = await question(`JWT Secret (presiona Enter para usar el generado): `) || defaultConfig.JWT_SECRET;
   config.JWT_EXPIRES_IN = await question(`Expiración del token (${defaultConfig.JWT_EXPIRES_IN}): `) || defaultConfig.JWT_EXPIRES_IN;
 
   // Configuración de CORS
-  console.log(`\n${colors.blue}🌐 CONFIGURACIÓN DE CORS${colors.reset}`);
+  console.log(`\n${colors.blue}CONFIGURACIÓN DE CORS${colors.reset}`);
   config.FRONTEND_URL = await question(`URL del frontend (${defaultConfig.FRONTEND_URL}): `) || defaultConfig.FRONTEND_URL;
 
   // Configuración de la Aplicación
-  console.log(`\n${colors.blue}📱 CONFIGURACIÓN DE LA APLICACIÓN${colors.reset}`);
+  console.log(`\n${colors.blue}CONFIGURACIÓN DE LA APLICACIÓN${colors.reset}`);
   config.APP_NAME = await question(`Nombre de la aplicación (${defaultConfig.APP_NAME}): `) || defaultConfig.APP_NAME;
   config.APP_VERSION = await question(`Versión (${defaultConfig.APP_VERSION}): `) || defaultConfig.APP_VERSION;
   config.APP_DESCRIPTION = await question(`Descripción (${defaultConfig.APP_DESCRIPTION}): `) || defaultConfig.APP_DESCRIPTION;
 
   // Configuración de Seguridad
-  console.log(`\n${colors.blue}🛡️ CONFIGURACIÓN DE SEGURIDAD${colors.reset}`);
+  console.log(`\n${colors.blue}CONFIGURACIÓN DE SEGURIDAD${colors.reset}`);
   config.BCRYPT_ROUNDS = await question(`Rondas de bcrypt (${defaultConfig.BCRYPT_ROUNDS}): `) || defaultConfig.BCRYPT_ROUNDS;
   config.SESSION_SECRET = await question(`Session Secret (presiona Enter para usar el generado): `) || defaultConfig.SESSION_SECRET;
 
   // Configuración de Logs
-  console.log(`\n${colors.blue}📝 CONFIGURACIÓN DE LOGS${colors.reset}`);
+  console.log(`\n${colors.blue}CONFIGURACIÓN DE LOGS${colors.reset}`);
   config.LOG_LEVEL = await question(`Nivel de logs (${defaultConfig.LOG_LEVEL}): `) || defaultConfig.LOG_LEVEL;
   config.LOG_FILE = await question(`Archivo de logs (${defaultConfig.LOG_FILE}): `) || defaultConfig.LOG_FILE;
 
   // Configuración de Rate Limiting
-  console.log(`\n${colors.blue}⏱️ CONFIGURACIÓN DE RATE LIMITING${colors.reset}`);
+  console.log(`\n${colors.blue}CONFIGURACIÓN DE RATE LIMITING${colors.reset}`);
   config.RATE_LIMIT_WINDOW_MS = await question(`Ventana de tiempo en ms (${defaultConfig.RATE_LIMIT_WINDOW_MS}): `) || defaultConfig.RATE_LIMIT_WINDOW_MS;
   config.RATE_LIMIT_MAX_REQUESTS = await question(`Máximo de requests (${defaultConfig.RATE_LIMIT_MAX_REQUESTS}): `) || defaultConfig.RATE_LIMIT_MAX_REQUESTS;
 
   // Configuración de Archivos
-  console.log(`\n${colors.blue}📁 CONFIGURACIÓN DE ARCHIVOS${colors.reset}`);
+  console.log(`\n${colors.blue}CONFIGURACIÓN DE ARCHIVOS${colors.reset}`);
   config.MAX_FILE_SIZE = await question(`Tamaño máximo de archivo en bytes (${defaultConfig.MAX_FILE_SIZE}): `) || defaultConfig.MAX_FILE_SIZE;
   config.UPLOAD_PATH = await question(`Ruta de uploads (${defaultConfig.UPLOAD_PATH}): `) || defaultConfig.UPLOAD_PATH;
 
   // Configuración de Redis
-  console.log(`\n${colors.blue}🔴 CONFIGURACIÓN DE REDIS${colors.reset}`);
+  console.log(`\n${colors.blue}CONFIGURACIÓN DE REDIS${colors.reset}`);
   config.REDIS_URL = await question(`URL de Redis (${defaultConfig.REDIS_URL}): `) || defaultConfig.REDIS_URL;
 
   // Configuración de Monitoreo
-  console.log(`\n${colors.blue}📊 CONFIGURACIÓN DE MONITOREO${colors.reset}`);
+  console.log(`\n${colors.blue}CONFIGURACIÓN DE MONITOREO${colors.reset}`);
   config.ENABLE_METRICS = await question(`Habilitar métricas (${defaultConfig.ENABLE_METRICS}): `) || defaultConfig.ENABLE_METRICS;
   config.METRICS_PORT = await question(`Puerto de métricas (${defaultConfig.METRICS_PORT}): `) || defaultConfig.METRICS_PORT;
 
-  // Generar archivo .env
-  const envContent = `# ===========================================
-# CONFIGURACIÓN TELECOM PLUS S.A.S.
-# Generado automáticamente el ${new Date().toISOString()}
-# ===========================================
+  
 
-# Configuración de la Base de Datos
-MONGO_URI=${config.MONGO_URI}
-DB_NAME=${config.DB_NAME}
-DB_HOST=${config.DB_HOST}
-DB_PORT=${config.DB_PORT}
 
-# Configuración del Servidor
-PORT=${config.PORT}
-NODE_ENV=${config.NODE_ENV}
-
-# Configuración de JWT
-JWT_SECRET=${config.JWT_SECRET}
-JWT_EXPIRES_IN=${config.JWT_EXPIRES_IN}
-
-# Configuración de CORS
-FRONTEND_URL=${config.FRONTEND_URL}
-
-# Configuración de la Aplicación
-APP_NAME=${config.APP_NAME}
-APP_VERSION=${config.APP_VERSION}
-APP_DESCRIPTION=${config.APP_DESCRIPTION}
-
-# Configuración de Seguridad
-BCRYPT_ROUNDS=${config.BCRYPT_ROUNDS}
-SESSION_SECRET=${config.SESSION_SECRET}
-
-# Configuración de Logs
-LOG_LEVEL=${config.LOG_LEVEL}
-LOG_FILE=${config.LOG_FILE}
-
-# Configuración de Rate Limiting
-RATE_LIMIT_WINDOW_MS=${config.RATE_LIMIT_WINDOW_MS}
-RATE_LIMIT_MAX_REQUESTS=${config.RATE_LIMIT_MAX_REQUESTS}
-
-# Configuración de Archivos
-MAX_FILE_SIZE=${config.MAX_FILE_SIZE}
-UPLOAD_PATH=${config.UPLOAD_PATH}
-
-# Configuración de Redis
-REDIS_URL=${config.REDIS_URL}
-
-# Configuración de Monitoreo
-ENABLE_METRICS=${config.ENABLE_METRICS}
-METRICS_PORT=${config.METRICS_PORT}
-`;
-
-  // Escribir archivo .env
-  const envPath = path.join(process.cwd(), '.env');
-  fs.writeFileSync(envPath, envContent);
-
-  console.log(`\n${colors.green}${colors.bright}✅ Archivo .env creado exitosamente!${colors.reset}`);
-  console.log(`${colors.green}📁 Ubicación: ${envPath}${colors.reset}`);
-  console.log(`\n${colors.yellow}⚠️  IMPORTANTE:${colors.reset}`);
-  console.log(`${colors.yellow}   - El archivo .env ya está en .gitignore${colors.reset}`);
-  console.log(`${colors.yellow}   - No subas este archivo al repositorio${colors.reset}`);
-  console.log(`${colors.yellow}   - Cambia los secrets en producción${colors.reset}`);
+  
 
   rl.close();
 }

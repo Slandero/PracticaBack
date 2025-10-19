@@ -93,7 +93,7 @@ export const config: EnvironmentConfig = {
   JWT_EXPIRES_IN: getEnvVar('JWT_EXPIRES_IN', '7d'),
   
   // CORS
-  FRONTEND_URL: getEnvVar('FRONTEND_URL', 'http://localhost:3001'),
+  FRONTEND_URL: getEnvVar('FRONTEND_URL', 'http://localhost:3000'),
   
   // Aplicación
   APP_NAME: getEnvVar('APP_NAME', 'Telecom Plus S.A.S.'),
@@ -185,9 +185,9 @@ export const getConfigSummary = (): Partial<EnvironmentConfig> => {
 // Validar configuración al cargar el módulo
 try {
   validateConfig();
-  console.log('✅ Configuración de variables de entorno validada correctamente');
+  console.log('Configuración de variables de entorno validada correctamente');
 } catch (error) {
-  console.error('❌ Error en la configuración de variables de entorno:', error);
+  console.error('Error en la configuración de variables de entorno:', error);
   process.exit(1);
 }
 

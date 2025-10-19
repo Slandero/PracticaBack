@@ -63,16 +63,6 @@ app.use('/api/auth', authRoutes);
 app.use('/api/contracts', contractRoutes);
 app.use('/api/services', serviceRoutes);
 
-// Middleware para rutas no encontradas
-/*app.use('/*', (req, res) => {
-  res.status(404).json({
-    success: false,
-    message: 'Ruta no encontrada',
-    path: req.originalUrl,
-    method: req.method
-  });
-});*/
-
 // Middleware global de manejo de errores
 app.use((error: any, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
   console.error('Error no manejado:', error);
@@ -92,36 +82,36 @@ const startServer = async (): Promise<void> => {
     
     // Iniciar servidor
     app.listen(PORT, () => {
-      console.log('🚀 Servidor iniciado exitosamente');
-      console.log(`📡 Puerto: ${PORT}`);
-      console.log(`🌍 Entorno: ${config.NODE_ENV}`);
-      console.log(`🔗 URL: http://localhost:${PORT}`);
-      console.log(`📋 Health Check: http://localhost:${PORT}/health`);
-      console.log(`📊 Métricas: ${config.ENABLE_METRICS ? `http://localhost:${config.METRICS_PORT}` : 'Deshabilitadas'}`);
-      console.log('📚 Endpoints disponibles:');
-      console.log('   - POST /api/auth/register');
-      console.log('   - POST /api/auth/login');
-      console.log('   - GET  /api/contracts');
-      console.log('   - POST /api/contracts');
-      console.log('   - GET  /api/services');
-      console.log('   - POST /api/services');
-      console.log(`📝 Logs: ${config.LOG_FILE}`);
+      console.log('Servidor iniciado exitosamente');
+      console.log(`Puerto: ${PORT}`);
+      console.log(`Entorno: ${config.NODE_ENV}`);
+      console.log(`URL: http://localhost:${PORT}`);
+      console.log(`Health Check: http://localhost:${PORT}/health`);
+      console.log(`Métricas: ${config.ENABLE_METRICS ? `http://localhost:${config.METRICS_PORT}` : 'Deshabilitadas'}`);
+      console.log('Endpoints disponibles:');
+      console.log('POST /api/auth/register');
+      console.log('POST /api/auth/login');
+      console.log('GET  /api/contracts');
+      console.log('POST /api/contracts');
+      console.log('GET  /api/services');
+      console.log('POST /api/services');
+      console.log(`Logs: ${config.LOG_FILE}`);
     });
     
   } catch (error) {
-    console.error('❌ Error iniciando servidor:', error);
+    console.error('Error iniciando servidor:', error);
     process.exit(1);
   }
 };
 
 // Manejar cierre graceful del servidor
 process.on('SIGTERM', () => {
-  console.log('🛑 SIGTERM recibido, cerrando servidor...');
+  console.log('SIGTERM recibido, cerrando servidor...');
   process.exit(0);
 });
 
 process.on('SIGINT', () => {
-  console.log('🛑 SIGINT recibido, cerrando servidor...');
+  console.log('SIGINT recibido, cerrando servidor...');
   process.exit(0);
 });
 

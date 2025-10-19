@@ -13,7 +13,7 @@ export const connectDB = async (): Promise<void> => {
 
 // Manejar eventos de conexión
 mongoose.connection.on('connected', () => {
-  console.log('🔗 Mongoose conectado a MongoDB');
+  console.log(' Mongoose conectado a MongoDB');
 });
 
 mongoose.connection.on('error', (err) => {

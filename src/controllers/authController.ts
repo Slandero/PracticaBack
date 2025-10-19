@@ -322,9 +322,7 @@ export const changePassword = async (req: AuthenticatedRequest, res: Response): 
 // Cerrar sesión (opcional - principalmente para logging)
 export const logout = async (_req: AuthenticatedRequest, res: Response): Promise<void> => {
   try {
-    // En un sistema JWT stateless, el logout se maneja en el frontend
-    // eliminando el token del localStorage/sessionStorage
-    // Aquí solo registramos la acción para auditoría
+    
     
     res.status(200).json({
       success: true,
